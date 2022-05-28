@@ -1,2 +1,2 @@
 # staplecounter
-First AWS app, a simple inrementer with login capabilities
+First AWS app, a simple incrementer with login capabilities
