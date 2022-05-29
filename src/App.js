@@ -15,40 +15,90 @@ class Welcome extends Component {
     }
 }
 
-class PrintStapleCount extends Component {
+class Clock extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
   render() {
     return (
       <div>
-        <p>{this.props.staple.count}</p>
-      </div>      
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
     );
   }
 }
 
-class App extends Component {
+class Staple extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       count: 0,
-
     }
-  }
+  } 
 
-  // async componentDidMount() {
-  //   this.setState(async (staple) => await API.graphql(graphqlOperation(createStaple)));
-  // }
-
-  addCount = async () => {
+  incrementStaple = async () => {
     this.setState((state) => ({
       count: state.count + 1
     }));
   }
 
-  subCount = async () => {
+  doubleStaple = async () => {
     this.setState((state) => ({
-      count: state.count -1
+      count: state.count * 2
     }));
   }
+  
+  decrementStaple = async () => {
+    this.setState((state) => ({
+      count: state.count - 1
+    }));
+  }
+
+  halveStaple = async () => {
+    this.setState((state) => ({
+      count: state.count / 2
+    }));
+  }
+    
+  render() {
+    return (
+      <div>
+        <h1>{this.state.count}</h1>
+        <div>
+          <button onClick={this.incrementStaple}>Add 1</button>
+          <button onClick={this.decrementStaple}>Subtract 1</button>
+        </div>
+        <div>
+          <button onClick={this.doubleStaple}>x2</button>   
+          <button onClick={this.halveStaple}>/2</button>
+        </div>
+      </div>
+    );
+  }
+
+}
+
+
+class App extends Component {
 
   render() {
     return (
@@ -56,10 +106,8 @@ class App extends Component {
         {({ signOut, user }) => (
           <main>
             <Welcome name={user.username } />
-            <div>{this.state.count}</div> 
-            {/* <div>{this.state.staple.count}</div> */}
-
-            <div><button onClick={this.addCount}>Add 1</button><button onClick={this.subCount}>Subtract 1</button></div>
+            <Clock />
+            <Staple />
             <button onClick={signOut}>Sign out</button>
           </main>
         )}
