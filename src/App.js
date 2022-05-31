@@ -52,7 +52,6 @@ class Staple extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wrapper: props.wrapper,
       count: 0,
     }
   } 
@@ -84,13 +83,11 @@ class Staple extends Component {
   render() {
     return (
       <div>
-        <div style={this.state.wrapper}>
           <h1>{this.state.count}</h1>
           <button onClick={this.incrementStaple}>Add 1</button>
           <button onClick={this.decrementStaple}>Subtract 1</button>
           <button onClick={this.doubleStaple}>x2</button>   
           <button onClick={this.halveStaple}>/2</button>
-        </div>
       </div>
     );
   }
@@ -99,35 +96,16 @@ class Staple extends Component {
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state= {
-      wrapper: {
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh'
-      }
-    }
-  }
 
   render() {
     return (
       <Authenticator>
         {({ signOut, user }) => (
           <main>
-          <div style={this.state.wrapper}>
-            <Welcome name={user.username } />
-          </div>
-          <div style={this.state.wrapper}>
-            <Clock />
-          </div>
-          <div style={this.state.wrapper}>
-            <Staple wrapper={this.state.wrapper} />
-          </div>
-          <div style={this.state.wrapper}>
             <button onClick={signOut}>Sign out</button>
-          </div>
+            <Welcome name={user.username } />
+            <Clock />
+            <Staple  />
           </main>
         )}
       </Authenticator>
