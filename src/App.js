@@ -1,8 +1,6 @@
 import { Amplify, API, graphqlOperation } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
-import { createStaple, updateStaple } from './graphql/mutations';
 import { Component } from 'react';
-import { getStaple } from './graphql/queries';
 import '@aws-amplify/ui-react/styles.css';
 
 import { Welcome, Clock, Staple } from './components.js';
