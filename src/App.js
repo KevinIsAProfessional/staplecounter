@@ -1,6 +1,6 @@
-import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
-import { Component, useState } from 'react';
+import { useState } from 'react';
 import '@aws-amplify/ui-react/styles.css';
 
 
@@ -10,7 +10,7 @@ import awsExports from './aws-exports';
 Amplify.configure(awsExports);
 
 function App() {
-  const [count, setCount ] = useState(0);
+  const [count] = useState(0);
 
   return (
       <Authenticator>
